@@ -168,9 +168,9 @@ class _SpeseScreenState extends State<SpeseScreen> {
                                           (listaSpese[index].ritirato != null)
                                               ? Colors.green
                                               : Colors.red)),
-                              subtitle: listaSpese[index]
-                                          .data_ritiro != null
-                                  ? Text("")//listaSpese[index].data_ritiro.toString().split(" ").first
+                              subtitle: listaSpese[index].data_ritiro != null
+                                  ? Text(
+                                      "") //listaSpese[index].data_ritiro.toString().split(" ").first
                                   : Text("Data non trovata"),
                               trailing: Icon(Icons.arrow_forward_ios),
                               onTap: () async {

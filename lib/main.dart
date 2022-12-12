@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:i_tortani_v_2_0/Screens/Spese/SpeseScreen.dart';
-import 'package:i_tortani_v_2_0/Utils/DB/Tortani/TortaniDBUser.dart';
 
 import 'Screens/Tortani/TortaniScreen.dart';
+import 'Utils/API/Tortani/TortaniAPIUser.dart';
 import 'Utils/DB/Spese/SpeseDBUser.dart';
 
 void main() {
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 actions: [
                                   TextButton(
                                       onPressed: () async {
-                                        await TortaniDBUser.deleteAllTortani();
+                                        await TortaniAPIUser.deleteAllTortani();
                                         Navigator.of(context).pop();
                                       },
                                       child: Text('SI')),

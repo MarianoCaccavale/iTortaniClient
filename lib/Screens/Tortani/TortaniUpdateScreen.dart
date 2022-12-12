@@ -1,8 +1,10 @@
 import 'dart:core';
+
 import 'package:flutter/material.dart';
-import 'package:i_tortani_v_2_0/Utils/DB/Tortani/TortaniDBUser.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+
+import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 
 class TortaniUpdateScreen extends StatefulWidget {
   final TortaniOrder ordine;
@@ -247,7 +249,7 @@ class _TortaniUpdateScreenState extends State<TortaniUpdateScreen> {
           'ritirato': '',
         });
 
-        await TortaniDBUser.updateOrdine(order, oldClient);
+        await TortaniAPIUser.updateOrdine(order, oldClient);
 
         Navigator.of(context).pop();
       } catch (e) {
@@ -520,7 +522,8 @@ class _TortaniUpdateScreenState extends State<TortaniUpdateScreen> {
                                   setState(() {
                                     //Imposto la data al giorno del ritiro, ma imposto custom l'ora alle 16. Questo mi permette successivamente
                                     //di controllare automaticamente gli ordini non ritirati entro le 18
-                                    data_ritiro = DateTime(value.year, value.month, value.day, 18, 0);
+                                    data_ritiro = DateTime(value.year,
+                                        value.month, value.day, 18, 0);
                                     print(data_ritiro);
                                   });
                                 },

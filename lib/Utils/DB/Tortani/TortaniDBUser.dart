@@ -65,14 +65,12 @@ class TortaniDBUser {
       var db = await DBHelper.instance.db;
       ordine.ritirato = DateTime.now();
 
-      if(ordine.idOrdine != 0){
+      if (ordine.idOrdine != 0) {
         await db.update(table_name, ordine.toJson(),
             where: 'id = ?', whereArgs: [ordine.idOrdine]);
-      }else{
-
+      } else {
         await db.update(table_name, ordine.toJson(),
             where: 'cliente = ?', whereArgs: [ordine.cliente]);
-
       }
 
       return true;
@@ -88,12 +86,10 @@ class TortaniDBUser {
 
       var int = 0;
 
-      if(order.idOrdine != 0){
-
-        int = await db.update(table_name, order.toJson(), where: 'id = ?', whereArgs: [order.idOrdine]);
-
-      }else{
-
+      if (order.idOrdine != 0) {
+        int = await db.update(table_name, order.toJson(),
+            where: 'id = ?', whereArgs: [order.idOrdine]);
+      } else {
         int = await db.update(table_name, order.toJson(),
             where: 'cliente = ?', whereArgs: [oldClient]);
       }
@@ -111,9 +107,9 @@ class TortaniDBUser {
     try {
       var db = await DBHelper.instance.db;
 
-      if(order.idOrdine != 0){
+      if (order.idOrdine != 0) {
         db.delete(table_name, where: 'id = ?', whereArgs: [order.idOrdine]);
-      }else{
+      } else {
         db.delete(table_name, where: 'cliente = ?', whereArgs: [order.cliente]);
       }
 
@@ -208,8 +204,7 @@ class TortaniDBUser {
   }
 
   static Future<List<TortaniOrder>> getTortaniFromDate(DateTime date) async {
-
-    try{
+    try {
       var db = await DBHelper.instance.db;
 
       List<TortaniOrder> listaRes = [];
@@ -223,11 +218,9 @@ class TortaniDBUser {
       });
 
       return listaRes;
-
-    }catch(e){
+    } catch (e) {
       print(e);
       rethrow;
     }
-
   }
 }

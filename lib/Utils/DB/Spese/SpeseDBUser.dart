@@ -60,9 +60,10 @@ class SpeseDbUser {
     try {
       var db = await DBHelper.instance.db;
 
-      if (spesa.id != 0){
-        db.update(table_name, spesa.toJson(), where: 'id = ?', whereArgs: [spesa.id]);
-      }else{
+      if (spesa.id != 0) {
+        db.update(table_name, spesa.toJson(),
+            where: 'id = ?', whereArgs: [spesa.id]);
+      } else {
         db.update(table_name, spesa.toJson(),
             where: 'cliente = ?', whereArgs: [oldCliente]);
       }

@@ -43,7 +43,7 @@ class TortaniOrder {
       "num_half_pizze_scarole": this.num_half_pizze_scarole,
       "num_pizze_salsicce": this.num_pizze_salsiccie,
       "num_half_pizze_salsicce": this.num_half_pizze_salsiccie,
-      "num_rustici":this.num_rustici,
+      "num_rustici": this.num_rustici,
       "descrizione": this.descrizione,
       "cell_num": this.cell_num,
       "data_ritiro": this.data_ritiro.toString().split(" ").first,

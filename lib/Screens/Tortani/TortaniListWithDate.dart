@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:i_tortani_v_2_0/Utils/DB/Tortani/TortaniDBUser.dart';
 
+import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 import '../../Utils/Models/TortaniOrder.dart';
 
 class TortaniListWithDate extends StatefulWidget {
@@ -23,20 +23,22 @@ class TortaniListWithDateState extends State<TortaniListWithDate> {
       totHalfPizzeScarole = 0,
       totPizzeRipiene = 0,
       totPizzeSalsicce = 0,
-      totHalfPizzeSalsicce = 0, totRustici = 0;
+      totHalfPizzeSalsicce = 0,
+      totRustici = 0;
   int totTortaniRitirati = 0,
       totMezziTortaniRitirati = 0,
       totPizzeScaroleRitirate = 0,
       totHalfPizzeScaroleRitirate = 0,
       totPizzeRipieneRitirate = 0,
       totPizzeSalsicceRitirate = 0,
-      totHalfPizzeSalsicceRitirate = 0, totRusticiRitirati = 0;
+      totHalfPizzeSalsicceRitirate = 0,
+      totRusticiRitirati = 0;
 
   late List<TortaniOrder> tortaniOfThisDay;
 
   void _setup() async {
     tortaniOfThisDay =
-        await TortaniDBUser.getTortaniFromDate(widget.selectedDate);
+        await TortaniAPIUser.getTortaniFromDate(widget.selectedDate);
 
     setState(() {
       tortaniOfThisDay = tortaniOfThisDay;
@@ -177,7 +179,8 @@ class TortaniListWithDateState extends State<TortaniListWithDate> {
                       ),
                       Row(
                         children: [
-                          Text('Mezze pizze salsicce e friarielli: $totHalfPizzeSalsicce',
+                          Text(
+                              'Mezze pizze salsicce e friarielli: $totHalfPizzeSalsicce',
                               style: TextStyle(fontSize: 20)),
                         ],
                       ),
@@ -235,7 +238,8 @@ class TortaniListWithDateState extends State<TortaniListWithDate> {
                       ),
                       Row(
                         children: [
-                          Text('Mezze pizze scarole: $totHalfPizzeScaroleRitirate',
+                          Text(
+                              'Mezze pizze scarole: $totHalfPizzeScaroleRitirate',
                               style: TextStyle(fontSize: 20)),
                         ],
                       ),
@@ -322,7 +326,8 @@ class TortaniListWithDateState extends State<TortaniListWithDate> {
                         children: [
                           Text(
                               'Mezze pizze scarole: ' +
-                                  (totHalfPizzeScarole - totHalfPizzeScaroleRitirate)
+                                  (totHalfPizzeScarole -
+                                          totHalfPizzeScaroleRitirate)
                                       .toString(),
                               style: TextStyle(fontSize: 20)),
                         ],
@@ -340,7 +345,8 @@ class TortaniListWithDateState extends State<TortaniListWithDate> {
                         children: [
                           Text(
                               'Mezze pizze salsicce e friarielli: ' +
-                                  (totHalfPizzeSalsicce - totHalfPizzeSalsicceRitirate)
+                                  (totHalfPizzeSalsicce -
+                                          totHalfPizzeSalsicceRitirate)
                                       .toString(),
                               style: TextStyle(fontSize: 20)),
                         ],

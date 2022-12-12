@@ -1,8 +1,10 @@
 import 'dart:core';
+
 import 'package:flutter/material.dart';
-import 'package:i_tortani_v_2_0/Utils/DB/Tortani/TortaniDBUser.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+
+import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 
 class TortaniAddScreen extends StatefulWidget {
   @override
@@ -237,7 +239,7 @@ class _TortaniAddScreenState extends State<TortaniAddScreen> {
           'ritirato': '',
         });
 
-        await TortaniDBUser.insertOrdine(order);
+        await TortaniAPIUser.insertOrdine(order);
 
         Navigator.of(context).pop();
       } catch (e) {
@@ -480,12 +482,13 @@ class _TortaniAddScreenState extends State<TortaniAddScreen> {
                               Text('Data ritiro(*): ',
                                   style: TextStyle(fontSize: 20)),
                               data_ritiro != null
-                                  ? Text(data_ritiro!.day.toString() +
-                                      '-' +
-                                      data_ritiro!.month.toString() +
-                                      '-' +
-                                      data_ritiro!.year.toString(),
-                                  style: TextStyle(fontSize: 20))
+                                  ? Text(
+                                      data_ritiro!.day.toString() +
+                                          '-' +
+                                          data_ritiro!.month.toString() +
+                                          '-' +
+                                          data_ritiro!.year.toString(),
+                                      style: TextStyle(fontSize: 20))
                                   : Text(''),
                             ],
                           ),
@@ -498,7 +501,8 @@ class _TortaniAddScreenState extends State<TortaniAddScreen> {
                                   setState(() {
                                     //Imposto la data al giorno del ritiro, ma imposto custom l'ora alle 16. Questo mi permette successivamente
                                     //di controllare automaticamente gli ordini non ritirati entro le 18
-                                    data_ritiro = DateTime(value.year, value.month, value.day, 18, 0);
+                                    data_ritiro = DateTime(value.year,
+                                        value.month, value.day, 18, 0);
                                     print(data_ritiro);
                                   });
                                 },

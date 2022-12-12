@@ -136,21 +136,21 @@ class _SpeseDetailScreen extends State<SpeseDetailScreen> {
                 children: [
                   widget.spesa.ritirato != null
                       ? Text(
-                      "RITIRATO il " +
-                          widget.spesa.ritirato!.day.toString() +
-                          " - " +
-                          widget.spesa.ritirato!.month.toString() +
-                          " - " +
-                          widget.spesa.ritirato!.year.toString(),
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green))
+                          "RITIRATO il " +
+                              widget.spesa.ritirato!.day.toString() +
+                              " - " +
+                              widget.spesa.ritirato!.month.toString() +
+                              " - " +
+                              widget.spesa.ritirato!.year.toString(),
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green))
                       : Text("NON RITIRATO",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
                 ],
               ),
             ),

@@ -5,8 +5,9 @@ import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniAddScreen.dart';
 import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniDetailsScreen.dart';
 import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniListWithDate.dart';
 import 'package:i_tortani_v_2_0/Utils/Constants.dart';
-import 'package:i_tortani_v_2_0/Utils/DB/Tortani/TortaniDBUser.dart';
 import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+
+import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 
 class TortaniScreen extends StatefulWidget {
   @override
@@ -43,7 +44,6 @@ class _TortaniScreenState extends State<TortaniScreen> {
   TextEditingController controllerSearch = new TextEditingController();
 
   _contaTortani() {
-
     listaTortaniNonRitirati.clear();
 
     totProdotti = 0;
@@ -112,7 +112,7 @@ class _TortaniScreenState extends State<TortaniScreen> {
   }
 
   _setup() async {
-    listaTortani = await TortaniDBUser.getAllTortani();
+    listaTortani = await TortaniAPIUser.getAllTortani();
 
     setState(() {
       listaTortani = listaTortani;
@@ -129,7 +129,7 @@ class _TortaniScreenState extends State<TortaniScreen> {
   _search(String nomeCliente) async {
     if (nomeCliente.compareTo('') != 0) {
       listaTortani =
-          await TortaniDBUser.searchOrder(nomeCliente.trimRight().trimLeft());
+          await TortaniAPIUser.searchOrder(nomeCliente.trimRight().trimLeft());
 
       setState(() {
         listaTortani = listaTortani;

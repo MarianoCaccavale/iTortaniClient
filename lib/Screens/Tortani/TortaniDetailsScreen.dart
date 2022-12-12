@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniUpdateScreen.dart';
-import 'package:i_tortani_v_2_0/Utils/DB/Tortani/TortaniDBUser.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniUpdateScreen.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+
+import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 
 class TortaniDetailsScreen extends StatefulWidget {
   final TortaniOrder ordine;
@@ -18,7 +19,7 @@ class TortaniDetailsScreen extends StatefulWidget {
 
 class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
   _marcaRitiro(TortaniOrder ordine) async {
-    await TortaniDBUser.updateOrdineRitirato(ordine);
+    await TortaniAPIUser.updateOrdineRitirato(ordine);
   }
 
   @override
@@ -190,11 +191,11 @@ class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
                 padding: EdgeInsets.all(20),
                 child: widget.ordine.cell_num != 5555555555
                     ? Text(
-                    "Numero di Cellulare: " +
-                        widget.ordine.cell_num.toString(),
-                    style: TextStyle(fontSize: 20))
+                        "Numero di Cellulare: " +
+                            widget.ordine.cell_num.toString(),
+                        style: TextStyle(fontSize: 20))
                     : Text("Numero di Cellulare: non presente",
-                    style: TextStyle(fontSize: 20)),
+                        style: TextStyle(fontSize: 20)),
               ),
               Padding(
                 padding: EdgeInsets.all(10),
@@ -204,7 +205,7 @@ class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
                     widget.ordine.descrizione.isNotEmpty
                         ? Text(widget.ordine.descrizione)
                         : Text("Nessuna descrizione fornita",
-                        style: TextStyle(fontSize: 20))
+                            style: TextStyle(fontSize: 20))
                   ],
                 ),
               ),
@@ -231,8 +232,8 @@ class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
                           fontWeight: FontWeight.w400,
                           fontSize: 20,
                           color: widget.ordine.data_ritiro!
-                              .compareTo(DateTime.now()) <
-                              0
+                                      .compareTo(DateTime.now()) <
+                                  0
                               ? Colors.red
                               : Colors.green),
                     ),
@@ -242,21 +243,21 @@ class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
               Center(
                 child: widget.ordine.ritirato != null
                     ? Text(
-                    "RITIRATO il " +
-                        widget.ordine.ritirato!.day.toString() +
-                        " - " +
-                        widget.ordine.ritirato!.month.toString() +
-                        " - " +
-                        widget.ordine.ritirato!.year.toString(),
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green))
+                        "RITIRATO il " +
+                            widget.ordine.ritirato!.day.toString() +
+                            " - " +
+                            widget.ordine.ritirato!.month.toString() +
+                            " - " +
+                            widget.ordine.ritirato!.year.toString(),
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green))
                     : Text("NON RITIRATO",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    )),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        )),
               ),
             ],
           ),
@@ -316,7 +317,7 @@ class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
               ),
               onPressed: () async {
                 try {
-                  await TortaniDBUser.deleteOrdine(widget.ordine);
+                  await TortaniAPIUser.deleteOrdine(widget.ordine);
                   Navigator.pop(context);
                 } catch (e) {
                   print(e);
