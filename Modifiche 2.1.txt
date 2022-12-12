@@ -1,0 +1,8 @@
+Modifche 2.1:
+	- Font più grande(FATTO)
+	- Numero di telefono obbligatorio nei tortani(FATTO)
+	- Aggiugni voce: rustico(FATTO)
+	- leva numero di telefono dalle spese e descrizione non obbligatoria.(FATTO) 
+	- imposta l'ora di ritiro, e controlla se si può fare in modo che mi esca già il giorno stesso che il cliente non ha ritirato(FATTO)
+	- imposta un'orario di chiusare alle 6:00 in modo da avvisare, in una lista nella schermata degli ordini, in modo che alle 6:00 ho il conteggio delle persone
+	  che non hanno ritirato, con nomi etc
