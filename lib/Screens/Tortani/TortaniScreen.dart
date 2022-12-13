@@ -112,7 +112,27 @@ class _TortaniScreenState extends State<TortaniScreen> {
   }
 
   _setup() async {
-    listaTortani = await TortaniAPIUser.getAllTortani();
+
+    try{
+      listaTortani = await TortaniAPIUser.getAllTortani();
+    }catch(e){
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Errore'),
+              content: Text('C\'è stato un problema nel download degli ordini. Controlla la connessione e riprova.\nErrore: ${e.toString()}'),
+              actions: [
+                TextButton(
+                  child: Text('Capito'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          });
+    }
+
 
     setState(() {
       listaTortani = listaTortani;
@@ -128,8 +148,27 @@ class _TortaniScreenState extends State<TortaniScreen> {
   ///Cerca nel database l'ordine del cliente con approssimazione di %nomeCliente%, ovvero basta che il nome del cliente contenga "nomeCliente"
   _search(String nomeCliente) async {
     if (nomeCliente.compareTo('') != 0) {
-      listaTortani =
-          await TortaniAPIUser.searchOrder(nomeCliente.trimRight().trimLeft());
+
+      try{
+        listaTortani =
+        await TortaniAPIUser.searchOrder(nomeCliente.trimRight().trimLeft());
+      }catch(e){
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Errore'),
+                content: Text('C\'è stato un problema nella ricerca degli ordini, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+                actions: [
+                  TextButton(
+                    child: Text('Capito'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              );
+            });
+      }
 
       setState(() {
         listaTortani = listaTortani;

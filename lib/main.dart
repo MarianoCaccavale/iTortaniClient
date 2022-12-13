@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:i_tortani_v_2_0/Screens/Spese/SpeseScreen.dart';
 
 import 'Screens/Tortani/TortaniScreen.dart';
+import 'Utils/API/Spese/SpeseAPIUser.dart';
 import 'Utils/API/Tortani/TortaniAPIUser.dart';
 import 'Utils/DB/Spese/SpeseDBUser.dart';
 
@@ -77,7 +78,25 @@ class _MyHomePageState extends State<MyHomePage> {
                                 actions: [
                                   TextButton(
                                       onPressed: () async {
-                                        SpeseDbUser.deleteAllSpese();
+                                        try{
+                                          SpeseAPIUser.deleteAllSpese();
+                                        }catch(e){
+                                          showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text('Errore'),
+                                                  content: Text('C\'è stato un problema nella cancellazione delle spese, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+                                                  actions: [
+                                                    TextButton(
+                                                      child: Text('Capito'),
+                                                      onPressed: () => Navigator.of(context).pop(),
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                        }
                                         Navigator.of(context).pop();
                                       },
                                       child: Text('SI')),
@@ -128,8 +147,28 @@ class _MyHomePageState extends State<MyHomePage> {
                                 actions: [
                                   TextButton(
                                       onPressed: () async {
-                                        await TortaniAPIUser.deleteAllTortani();
-                                        Navigator.of(context).pop();
+                                        try{
+                                          await TortaniAPIUser.deleteAllTortani();
+                                          Navigator.of(context).pop();
+                                        }catch(e){
+                                          showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text('Errore'),
+                                                  content: Text('C\'è stato un problema nella cancellazione dei tortani, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+                                                  actions: [
+                                                    TextButton(
+                                                      child: Text('Capito'),
+                                                      onPressed: () => Navigator.of(context).pop(),
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                          Navigator.of(context).pop();
+                                        }
+
                                       },
                                       child: Text('SI')),
                                   TextButton(

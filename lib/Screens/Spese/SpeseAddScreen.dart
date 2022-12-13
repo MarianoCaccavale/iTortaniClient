@@ -3,6 +3,8 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:i_tortani_v_2_0/Utils/DB/Spese/SpeseDBUser.dart';
 import 'package:i_tortani_v_2_0/Utils/Models/SpeseOrder.dart';
 
+import '../../Utils/API/Spese/SpeseAPIUser.dart';
+
 class SpeseAddScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -90,7 +92,25 @@ class _SpeseAddScreenState extends State<SpeseAddScreen> {
           'ritirato': '',
         });
 
-        await SpeseDbUser.insertSpese(spesa);
+        try{
+          await SpeseAPIUser.insertSpese(spesa);
+        }catch(e){
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Errore'),
+                  content: Text('C\'è stato un problema nell\'inserimento della spesa, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+                  actions: [
+                    TextButton(
+                      child: Text('Capito'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                );
+              });
+        }
 
         Navigator.of(context).pop();
       } catch (e) {

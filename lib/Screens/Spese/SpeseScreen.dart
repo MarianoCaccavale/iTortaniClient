@@ -3,6 +3,7 @@ import 'package:i_tortani_v_2_0/Screens/Spese/SpeseDetailScreen.dart';
 import 'package:i_tortani_v_2_0/Utils/DB/Spese/SpeseDBUser.dart';
 import 'package:i_tortani_v_2_0/Utils/Models/SpeseOrder.dart';
 
+import '../../Utils/API/Spese/SpeseAPIUser.dart';
 import 'SpeseAddScreen.dart';
 
 class SpeseScreen extends StatefulWidget {
@@ -44,7 +45,26 @@ class _SpeseScreenState extends State<SpeseScreen> {
   }
 
   _setup() async {
-    listaSpese = await SpeseDbUser.getAllSpese();
+
+    try{
+      listaSpese = await SpeseAPIUser.getAllSpese();
+    }catch(e){
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Errore'),
+              content: Text('C\'è stato un problema nel caricamente delle spese, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+              actions: [
+                TextButton(
+                  child: Text('Capito'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          });
+    }
 
     setState(() {
       listaSpese = listaSpese;
@@ -54,7 +74,26 @@ class _SpeseScreenState extends State<SpeseScreen> {
 
   _search(String nomeCliente) async {
     if (nomeCliente.compareTo('') != 0) {
-      listaSpese = await SpeseDbUser.searchOrder(nomeCliente);
+
+      try{
+        listaSpese = await SpeseAPIUser.searchOrder(nomeCliente);
+      }catch(e){
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Errore'),
+                content: Text('C\'è stato un problema nella ricerca delle spese, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+                actions: [
+                  TextButton(
+                    child: Text('Capito'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              );
+            });
+      }
 
       setState(() {
         listaSpese = listaSpese;

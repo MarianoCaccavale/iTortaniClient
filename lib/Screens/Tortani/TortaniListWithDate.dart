@@ -37,8 +37,27 @@ class TortaniListWithDateState extends State<TortaniListWithDate> {
   late List<TortaniOrder> tortaniOfThisDay;
 
   void _setup() async {
-    tortaniOfThisDay =
-        await TortaniAPIUser.getTortaniFromDate(widget.selectedDate);
+
+    try{
+      tortaniOfThisDay = await TortaniAPIUser.getTortaniFromDate(widget.selectedDate);
+    }catch(e){
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Errore'),
+              content: Text('C\'è stato un problema nel download degli ordini per data, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+              actions: [
+                TextButton(
+                  child: Text('Capito'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          });
+    }
+
 
     setState(() {
       tortaniOfThisDay = tortaniOfThisDay;

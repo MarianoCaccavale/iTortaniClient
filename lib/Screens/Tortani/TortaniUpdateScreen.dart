@@ -249,7 +249,26 @@ class _TortaniUpdateScreenState extends State<TortaniUpdateScreen> {
           'ritirato': '',
         });
 
-        await TortaniAPIUser.updateOrdine(order, oldClient);
+        try{
+          await TortaniAPIUser.updateOrdine(order, oldClient);
+        }catch(e){
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Errore'),
+                  content: Text('C\'è stato un problema nell\'aggiornamento dell\'ordine, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+                  actions: [
+                    TextButton(
+                      child: Text('Capito'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                );
+              });
+        }
+
 
         Navigator.of(context).pop();
       } catch (e) {

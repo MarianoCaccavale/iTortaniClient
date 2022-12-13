@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:i_tortani_v_2_0/Utils/DB/Spese/SpeseDBUser.dart';
 import 'package:i_tortani_v_2_0/Utils/Models/SpeseOrder.dart';
 
+import '../../Utils/API/Spese/SpeseAPIUser.dart';
 import 'SpeseUpdateScreen.dart';
 
 class SpeseDetailScreen extends StatefulWidget {
@@ -18,7 +19,25 @@ class SpeseDetailScreen extends StatefulWidget {
 
 class _SpeseDetailScreen extends State<SpeseDetailScreen> {
   _marcaRitiro(SpeseOrder spesa) async {
-    await SpeseDbUser.updateSpesaRitiro(spesa);
+    try{
+      await SpeseAPIUser.updateSpesaRitiro(spesa);
+    }catch(e){
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Errore'),
+              content: Text('C\'è stato un problema nell\'aggiornamento della spesa, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+              actions: [
+                TextButton(
+                  child: Text('Capito'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          });
+    }
   }
 
   @override
@@ -211,7 +230,7 @@ class _SpeseDetailScreen extends State<SpeseDetailScreen> {
                       MediaQuery.of(context).size.height / 10)),
               onPressed: () async {
                 try {
-                  await SpeseDbUser.deleteSpesa(widget.spesa);
+                  await SpeseAPIUser.deleteSpesa(widget.spesa);
                   Navigator.pop(context);
                 } catch (e) {
                   print(e);

@@ -30,7 +30,7 @@ class NetworkCallUtils {
   }
 
   static Future getCall({url}) async {
-    final response = await http.get(url);
+    final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
@@ -53,7 +53,7 @@ class NetworkCallUtils {
   }
 
   static Future putCall({url, payload}) async {
-    final response = await http.put(url,
+    final response = await http.put(Uri.parse(url),
         headers: {"Content-type": "application/json; charset=UTF-8"},
         body: payload);
     if (response.statusCode == 201 || response.statusCode == 200) {
@@ -66,7 +66,7 @@ class NetworkCallUtils {
   }
 
   static Future patchCall({url, payload}) async {
-    final response = await http.patch(url,
+    final response = await http.patch(Uri.parse(url),
         headers: {"Content-type": "application/json; charset=UTF-8"},
         body: payload);
     if (response.statusCode == 201 || response.statusCode == 200) {
@@ -80,7 +80,7 @@ class NetworkCallUtils {
 
   static Future deleteCall({url}) async {
     final response = await http.delete(
-      url,
+      Uri.parse(url),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
       final data = json.decode(response.body);

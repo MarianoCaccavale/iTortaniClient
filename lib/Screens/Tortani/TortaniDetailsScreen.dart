@@ -19,7 +19,27 @@ class TortaniDetailsScreen extends StatefulWidget {
 
 class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
   _marcaRitiro(TortaniOrder ordine) async {
-    await TortaniAPIUser.updateOrdineRitirato(ordine);
+
+    try{
+      await TortaniAPIUser.updateOrdineRitirato(ordine);
+    }catch(e){
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Errore'),
+              content: Text('C\'è stato un problema nel marcare il ritiro dell\'ordine, controlla la connessione internet e riprova.\n Errore: ${e.toString()}'),
+              actions: [
+                TextButton(
+                  child: Text('Capito'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          });
+    }
+
   }
 
   @override
@@ -327,7 +347,7 @@ class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
                         return AlertDialog(
                           title: Text("Errore nell'eliminazione dell'ordine"),
                           content: Text(
-                              'C\'è stato un problema nell\'eliminazione dell\'ordine, riprovare tra qualche minuto)'),
+                              'C\'è stato un problema nell\'eliminazione dell\'ordine. Controlla la connessione internet e riprova)'),
                           actions: [
                             TextButton(
                               child: Text('Capito'),
