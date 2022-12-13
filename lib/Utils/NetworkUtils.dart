@@ -30,11 +30,14 @@ class NetworkCallUtils {
   }
 
   static Future getCall({url}) async {
-    final response = await http.get(Uri.parse(url));
+    Uri uri = Uri.parse(url);
+    final response = await http.get(uri);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
     } else {
+      final data = json.decode(response.body);
+      print(data);
       throw Exception(
           "Response status code: " + response.statusCode.toString());
     }
@@ -47,6 +50,8 @@ class NetworkCallUtils {
       final data = json.decode(response.body);
       return data;
     } else {
+      final data = json.decode(response.body);
+      print(data);
       throw Exception(
           "Response status code: " + response.statusCode.toString());
     }
@@ -55,11 +60,13 @@ class NetworkCallUtils {
   static Future putCall({url, payload}) async {
     final response = await http.put(Uri.parse(url),
         headers: {"Content-type": "application/json; charset=UTF-8"},
-        body: payload);
+        body: jsonEncode(payload));
     if (response.statusCode == 201 || response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
     } else {
+      final data = json.decode(response.body);
+      print(data);
       throw Exception(
           "Response status code: " + response.statusCode.toString());
     }
@@ -68,11 +75,13 @@ class NetworkCallUtils {
   static Future patchCall({url, payload}) async {
     final response = await http.patch(Uri.parse(url),
         headers: {"Content-type": "application/json; charset=UTF-8"},
-        body: payload);
+        body: jsonEncode(payload));
     if (response.statusCode == 201 || response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
     } else {
+      final data = json.decode(response.body);
+      print(data);
       throw Exception(
           "Response status code: " + response.statusCode.toString());
     }
@@ -86,6 +95,8 @@ class NetworkCallUtils {
       final data = json.decode(response.body);
       return data;
     } else {
+      final data = json.decode(response.body);
+      print(data);
       throw Exception(
           "Response status code: " + response.statusCode.toString());
     }

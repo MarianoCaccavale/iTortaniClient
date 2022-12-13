@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/TortaniOrder.dart';
 
 import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 
@@ -252,14 +252,17 @@ class _TortaniAddScreenState extends State<TortaniAddScreen> {
                   actions: [
                     TextButton(
                       child: Text('Capito'),
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        },
                     ),
                   ],
                 );
               });
         }
 
-        Navigator.of(context).pop();
+
       } catch (e) {
         print(e);
         showDialog(

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:i_tortani_v_2_0/Screens/Spese/SpeseScreen.dart';
 
@@ -6,7 +9,21 @@ import 'Utils/API/Spese/SpeseAPIUser.dart';
 import 'Utils/API/Tortani/TortaniAPIUser.dart';
 import 'Utils/DB/Spese/SpeseDBUser.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() {
+
+  if (kDebugMode) {
+    HttpOverrides.global = new MyHttpOverrides();
+  }
+
   runApp(MyApp());
 }
 

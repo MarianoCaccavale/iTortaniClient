@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniUpdateScreen.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/TortaniOrder.dart';
 
 import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 

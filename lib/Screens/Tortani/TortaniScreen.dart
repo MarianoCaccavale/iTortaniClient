@@ -5,7 +5,7 @@ import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniAddScreen.dart';
 import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniDetailsScreen.dart';
 import 'package:i_tortani_v_2_0/Screens/Tortani/TortaniListWithDate.dart';
 import 'package:i_tortani_v_2_0/Utils/Constants.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/TortaniOrder.dart';
 
 import '../../Utils/API/Tortani/TortaniAPIUser.dart';
 

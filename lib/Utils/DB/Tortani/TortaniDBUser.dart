@@ -1,5 +1,5 @@
 import 'package:i_tortani_v_2_0/Utils/DB/DBHelper.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/TortaniOrder.dart';
 
 class TortaniDBUser {
   static final String table_name = 'ORDER_TORTANI';

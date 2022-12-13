@@ -1,5 +1,5 @@
 import 'package:i_tortani_v_2_0/Utils/DB/DBHelper.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/SpeseOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/SpeseOrder.dart';
 
 class SpeseDbUser {
   static final String table_name = 'SPESE';

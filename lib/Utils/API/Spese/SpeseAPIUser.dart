@@ -1,5 +1,5 @@
 import 'package:i_tortani_v_2_0/Utils/API/RestEndpoints.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/SpeseOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/SpeseOrder.dart';
 import 'package:i_tortani_v_2_0/Utils/NetworkUtils.dart';
 
 class SpeseAPIUser {

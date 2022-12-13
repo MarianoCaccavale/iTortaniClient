@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:i_tortani_v_2_0/Utils/API/RestEndpoints.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/TortaniOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/TortaniOrder.dart';
 import 'package:i_tortani_v_2_0/Utils/NetworkUtils.dart';
 
 class TortaniAPIUser {
@@ -15,7 +17,8 @@ class TortaniAPIUser {
   static Future<bool> insertOrdine(TortaniOrder order) async {
     try {
       await NetworkCallUtils.postCall(
-          url: RestEndpoints.tortaniRoot, payload: order.toJson());
+          url: RestEndpoints.tortaniRoot, payload: jsonEncode(
+          {"order": order.toJson()}));
 
       return true;
     } catch (e) {
@@ -28,7 +31,7 @@ class TortaniAPIUser {
     try {
       await NetworkCallUtils.putCall(
           url: RestEndpoints.tortaniRoot + order.idOrdine.toString(),
-          payload: order.toJson());
+          payload: jsonEncode({"order" : order.toJson()}));
 
       return true;
     } catch (e) {
@@ -41,7 +44,7 @@ class TortaniAPIUser {
     try {
       await NetworkCallUtils.putCall(
           url: RestEndpoints.tortaniRoot + order.idOrdine.toString(),
-          payload: order.toJson());
+          payload: jsonEncode({"order" : order.toJson()}));
 
       return true;
     } catch (e) {

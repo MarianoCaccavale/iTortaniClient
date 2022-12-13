@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i_tortani_v_2_0/Utils/DB/Spese/SpeseDBUser.dart';
-import 'package:i_tortani_v_2_0/Utils/Models/SpeseOrder.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/Entity/SpeseOrder.dart';
 
 import '../../Utils/API/Spese/SpeseAPIUser.dart';
 import 'SpeseUpdateScreen.dart';

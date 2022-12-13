@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Utils/API/Tortani/TortaniAPIUser.dart';
-import '../../Utils/Models/TortaniOrder.dart';
+import '../../Utils/Models/Entity/TortaniOrder.dart';
 
 class TortaniListWithDate extends StatefulWidget {
   final DateTime selectedDate;
