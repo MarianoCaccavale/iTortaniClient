@@ -53,21 +53,21 @@ class TortaniOrderDTO{
 
   factory TortaniOrderDTO.fromJson(Map<String, dynamic> json) {
     return TortaniOrderDTO(
-      json['Id'] ?? 0,
-      json['Cliente'],
-      json['NumHalfTortani'],
-      json['NumTortani'],
-      json['NumPizzeRipiene'],
-      json['NumPizzeScarole'],
-      json['NumHalfPizzeScarole'],
-      json['NumPizzeSalsiccie'],
-      json['NumHalfPizzeSalsiccie'],
-      json['NumRustici'],
-      json['Description'],
-      DateTime.parse(json['DataRitiro']),
-      cell_num: json['CellNum'],
+      json['id'] ?? 0,
+      json['cliente'],
+      json['numHalfTortani'],
+      json['numTortani'],
+      json['numPizzeRipiene'],
+      json['numPizzeScarole'],
+      json['numHalfPizzeScarole'],
+      json['numPizzeSalsiccie'],
+      json['numHalfPizzeSalsiccie'],
+      json['numRustici'],
+      json['description'],
+      DateTime.parse(json['dataRitiro']),
+      cell_num: json['cellNum'],
       ritirato:
-      json['Ritirato'] == "" ? null : DateTime.parse(json['Ritirato']),
+      json['ritirato'] == "" ? null : DateTime.parse(json['ritirato']),
     );
   }
 }

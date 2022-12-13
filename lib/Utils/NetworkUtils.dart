@@ -29,68 +29,9 @@ class NetworkCallUtils {
     }
   }
 
-  static Future getCall({url}) async {
-    Uri uri = Uri.parse(url);
-    final response = await http.get(uri);
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data;
-    } else {
-      final data = json.decode(response.body);
-      print(data);
-      throw Exception(
-          "Response status code: " + response.statusCode.toString());
-    }
-  }
-
   static Future postCall({url, payload}) async {
     final response = await http.post(Uri.parse(url),
         headers: {"Content-type": "application/json"}, body: payload);
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data;
-    } else {
-      final data = json.decode(response.body);
-      print(data);
-      throw Exception(
-          "Response status code: " + response.statusCode.toString());
-    }
-  }
-
-  static Future putCall({url, payload}) async {
-    final response = await http.put(Uri.parse(url),
-        headers: {"Content-type": "application/json; charset=UTF-8"},
-        body: jsonEncode(payload));
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data;
-    } else {
-      final data = json.decode(response.body);
-      print(data);
-      throw Exception(
-          "Response status code: " + response.statusCode.toString());
-    }
-  }
-
-  static Future patchCall({url, payload}) async {
-    final response = await http.patch(Uri.parse(url),
-        headers: {"Content-type": "application/json; charset=UTF-8"},
-        body: jsonEncode(payload));
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data;
-    } else {
-      final data = json.decode(response.body);
-      print(data);
-      throw Exception(
-          "Response status code: " + response.statusCode.toString());
-    }
-  }
-
-  static Future deleteCall({url}) async {
-    final response = await http.delete(
-      Uri.parse(url),
-    );
     if (response.statusCode == 201 || response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;

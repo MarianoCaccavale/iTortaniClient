@@ -1,13 +1,21 @@
+import 'dart:convert';
+
 import 'package:i_tortani_v_2_0/Utils/API/RestEndpoints.dart';
+import 'package:i_tortani_v_2_0/Utils/Models/DTO/SpeseOrderDTO.dart';
 import 'package:i_tortani_v_2_0/Utils/Models/Entity/SpeseOrder.dart';
 import 'package:i_tortani_v_2_0/Utils/NetworkUtils.dart';
 
+import '../../Constants.dart';
+
 class SpeseAPIUser {
   static void deleteAllSpese() async {
+    Map<String, dynamic> payload = {
+      'accessToken': Constants.accessToken,
+    };
+
     try {
-
-      await NetworkCallUtils.deleteCall(url: RestEndpoints.speseRoot);
-
+      await NetworkCallUtils.postCall(
+          url: RestEndpoints.speseDeleteAll, payload: jsonEncode(payload));
     } catch (e) {
       print(e);
       rethrow;
@@ -15,13 +23,17 @@ class SpeseAPIUser {
   }
 
   static Future<List<SpeseOrder>> getAllSpese() async {
+    Map<String, dynamic> payload = {
+      'accessToken': Constants.accessToken,
+    };
+
     List<SpeseOrder> listaRes = [];
 
     try {
+      dynamic spese = await NetworkCallUtils.postCall(
+          url: RestEndpoints.speseGetAllSpese, payload: jsonEncode(payload));
 
-      dynamic spese = await NetworkCallUtils.getCall(url: RestEndpoints.speseRoot);
-
-      for (dynamic spesa in spese){
+      for (dynamic spesa in spese) {
         listaRes.add(SpeseOrder.FromJson(spesa));
       }
 
@@ -33,9 +45,24 @@ class SpeseAPIUser {
   }
 
   static Future<bool> insertSpese(SpeseOrder spesa) async {
-    try {
+    Map<String, dynamic> payload = {
+      'accessToken': Constants.accessToken,
+    };
 
-      await NetworkCallUtils.postCall(url: RestEndpoints.speseRoot, payload: spesa.toJson());
+    try {
+      SpeseOrderDTO dto = SpeseOrderDTO(
+          spesa.id,
+          spesa.cliente,
+          spesa.cell_num,
+          spesa.descrizione,
+          spesa.luogo,
+          spesa.check_tortani,
+          spesa.data_ritiro);
+
+      payload['spesa'] = dto.toJson();
+
+      payload['spesa'] = await NetworkCallUtils.postCall(
+          url: RestEndpoints.speseInsertOrder, payload: jsonEncode(payload));
 
       return true;
     } catch (e) {
@@ -45,9 +72,26 @@ class SpeseAPIUser {
   }
 
   static Future<bool> updateSpesa(SpeseOrder spesa, String oldCliente) async {
+
+    Map<String, dynamic> payload = {
+      'accessToken': Constants.accessToken,
+    };
+    
     try {
 
-      await NetworkCallUtils.putCall(url: RestEndpoints.speseRoot + spesa.id.toString(), payload: spesa.toJson());
+      SpeseOrderDTO dto = SpeseOrderDTO(
+          spesa.id,
+          spesa.cliente,
+          spesa.cell_num,
+          spesa.descrizione,
+          spesa.luogo,
+          spesa.check_tortani,
+          spesa.data_ritiro);
+
+      payload['spesa'] = dto.toJson();
+      
+      await NetworkCallUtils.postCall(
+          url: RestEndpoints.speseUpdateOrdine, payload: jsonEncode(payload));
 
       return true;
     } catch (e) {
@@ -57,9 +101,13 @@ class SpeseAPIUser {
   }
 
   static Future<bool> deleteSpesa(SpeseOrder spesa) async {
+    
+    Map<String, dynamic> payload = {
+      'accessToken': Constants.accessToken,
+    };
+    
     try {
-
-      await NetworkCallUtils.deleteCall(url: RestEndpoints.speseRoot + spesa.id.toString());
+      await NetworkCallUtils.postCall(url: RestEndpoints.speseDeleteOrdine, payload: jsonEncode(payload));
 
       return true;
     } catch (e) {
@@ -69,10 +117,26 @@ class SpeseAPIUser {
   }
 
   static updateSpesaRitiro(SpeseOrder spesa) async {
+
+    Map<String, dynamic> payload = {
+      'accessToken': Constants.accessToken,
+    };
+    
     try {
 
-      await NetworkCallUtils.putCall(url: RestEndpoints.speseRoot + spesa.id.toString(), payload: spesa.toJson());
+      SpeseOrderDTO dto = SpeseOrderDTO(
+          spesa.id,
+          spesa.cliente,
+          spesa.cell_num,
+          spesa.descrizione,
+          spesa.luogo,
+          spesa.check_tortani,
+          spesa.data_ritiro);
 
+      payload['spesa'] = dto.toJson();
+      
+      await NetworkCallUtils.postCall(
+          url: RestEndpoints.speseUpdateOrderRitirato, payload: jsonEncode(payload));
     } catch (e) {
       print(e);
       rethrow;
@@ -80,13 +144,18 @@ class SpeseAPIUser {
   }
 
   static searchOrder(String nomeCliente) async {
+
+    Map<String, dynamic> payload = {
+      'accessToken': Constants.accessToken,
+    };
+
     List<SpeseOrder> listaRes = [];
 
     try {
+      dynamic spese =
+          await NetworkCallUtils.postCall(url: RestEndpoints.speseSearchOrder, payload: jsonEncode(payload));
 
-      dynamic spese = await NetworkCallUtils.getCall(url: RestEndpoints.speseSearch + nomeCliente);
-
-      for (dynamic spesa in spese){
+      for (dynamic spesa in spese) {
         listaRes.add(SpeseOrder.FromJson(spesa));
       }
 
