@@ -12,7 +12,7 @@ class RestEndpoints {
   static final tortaniSearchOrder = _root + _tortaniController + 'search_order';
   static final tortaniGetTortaniFromDate = _root + _tortaniController + 'search_order_by_date';
 
-  static final _speseController = _root + "Spese/";
+  static final _speseController = "Spese/";
   static final speseDeleteAll = _root + _speseController + "delete_all";
   static final speseInsertOrder = _root + _speseController + "insert_spesa";
   static final speseUpdateOrderRitirato = _root + _speseController + 'update_spesa';

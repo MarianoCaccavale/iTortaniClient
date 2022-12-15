@@ -19,25 +19,24 @@ class SpeseOrderDTO {
       'CellNum': this.cell_num,
       'Descrizione': this.descrizione,
       'Luogo': this.luogo,
-      'CheckTortani': this.check_tortani ? 1 : 0,
-      'DataRitiro': this.data_ritiro.toString(),
-      //'Ritirato': this.ritirato.toString(),
+      'CheckTortani': this.check_tortani,
+      'DataRitiro': this.data_ritiro.toString().split(" ").first,
       "Ritirato": this.ritirato != null ? this.ritirato.toString().split(" ").first : null,
     };
   }
 
   factory SpeseOrderDTO.FromJson(Map<String, dynamic> json) {
     return SpeseOrderDTO(
-      json['Id'] ?? 0,
-      json['Cliente'],
-      json['CellNum'],
-      json['Descrizione'],
-      json['Luogo'],
-      json['CheckTortani'] == 0 ? false : true,
-      DateTime.parse(json['DataRitiro']),
-      ritirato: json['Ritirato'] == "" || json['Ritirato'] == "null" || json['Ritirato'] == null
+      json['id'] ?? 0,
+      json['cliente'],
+      json['cellNum'],
+      json['descrizione'],
+      json['luogo'],
+      json['checkTortani'],
+      DateTime.parse(json['dataRitiro']),
+      ritirato: json['ritirato'] == "" || json['ritirato'] == "null" || json['ritirato'] == null
           ? null
-          : DateTime.parse(json['Ritirato']),
+          : DateTime.parse(json['ritirato']),
     );
   }
 }

@@ -23,18 +23,35 @@ class SpeseAPIUser {
   }
 
   static Future<List<SpeseOrder>> getAllSpese() async {
+
     Map<String, dynamic> payload = {
       'accessToken': Constants.accessToken,
     };
 
     List<SpeseOrder> listaRes = [];
 
+    SpeseOrderDTO dto;
+    SpeseOrder elem;
+
     try {
       dynamic spese = await NetworkCallUtils.postCall(
           url: RestEndpoints.speseGetAllSpese, payload: jsonEncode(payload));
 
       for (dynamic spesa in spese) {
-        listaRes.add(SpeseOrder.FromJson(spesa));
+
+        dto = SpeseOrderDTO.FromJson(spesa);
+
+        elem = SpeseOrder(
+            dto.id,
+            dto.cliente,
+            dto.cell_num,
+            dto.descrizione,
+            dto.luogo,
+            dto.check_tortani,
+            dto.data_ritiro
+        );
+
+        listaRes.add(elem);
       }
 
       listaRes.sort((spesa1, spesa2){
