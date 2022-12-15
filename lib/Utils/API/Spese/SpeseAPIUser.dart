@@ -37,6 +37,16 @@ class SpeseAPIUser {
         listaRes.add(SpeseOrder.FromJson(spesa));
       }
 
+      listaRes.sort((spesa1, spesa2){
+        if( spesa1.ritirato == null){
+          return -1;
+        }else if (spesa2.ritirato == null){
+          return 1;
+        }else{
+          return spesa1.ritirato!.compareTo(spesa2.ritirato!);
+        }
+      });
+
       return listaRes;
     } catch (e) {
       print(e);
@@ -104,6 +114,7 @@ class SpeseAPIUser {
     
     Map<String, dynamic> payload = {
       'accessToken': Constants.accessToken,
+      'id': spesa.id,
     };
     
     try {
@@ -147,6 +158,7 @@ class SpeseAPIUser {
 
     Map<String, dynamic> payload = {
       'accessToken': Constants.accessToken,
+      'nomeCliente': nomeCliente,
     };
 
     List<SpeseOrder> listaRes = [];
@@ -158,6 +170,16 @@ class SpeseAPIUser {
       for (dynamic spesa in spese) {
         listaRes.add(SpeseOrder.FromJson(spesa));
       }
+
+      listaRes.sort((order1, order2){
+        if( order1.ritirato == null){
+          return -1;
+        }else if (order2.ritirato == null){
+          return 1;
+        }else{
+          return order1.ritirato!.compareTo(order2.ritirato!);
+        }
+      });
 
       return listaRes;
     } catch (e) {

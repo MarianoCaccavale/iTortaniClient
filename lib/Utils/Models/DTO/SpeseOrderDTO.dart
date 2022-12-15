@@ -21,7 +21,8 @@ class SpeseOrderDTO {
       'Luogo': this.luogo,
       'CheckTortani': this.check_tortani ? 1 : 0,
       'DataRitiro': this.data_ritiro.toString(),
-      'Ritirato': this.ritirato.toString(),
+      //'Ritirato': this.ritirato.toString(),
+      "Ritirato": this.ritirato != null ? this.ritirato.toString().split(" ").first : null,
     };
   }
 
@@ -34,7 +35,7 @@ class SpeseOrderDTO {
       json['Luogo'],
       json['CheckTortani'] == 0 ? false : true,
       DateTime.parse(json['DataRitiro']),
-      ritirato: json['Ritirato'] == "" || json['Ritirato'] == "null"
+      ritirato: json['Ritirato'] == "" || json['Ritirato'] == "null" || json['Ritirato'] == null
           ? null
           : DateTime.parse(json['Ritirato']),
     );
