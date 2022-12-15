@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:i_tortani_v_2_0/Utils/API/RestEndpoints.dart';
 import 'package:i_tortani_v_2_0/Utils/Constants.dart';
 import 'package:i_tortani_v_2_0/Utils/Models/DTO/TortaniOrderDTO.dart';
@@ -7,6 +8,8 @@ import 'package:i_tortani_v_2_0/Utils/Models/Entity/TortaniOrder.dart';
 import 'package:i_tortani_v_2_0/Utils/NetworkUtils.dart';
 
 class TortaniAPIUser {
+
+  // DOVREBBE FUNZIONARE!
   static Future<void> deleteAllTortani() async {
 
     Map<String, dynamic> payload = {
@@ -21,6 +24,7 @@ class TortaniAPIUser {
     }
   }
 
+  // DOVREBBE FUNZIONARE!
   static Future<bool> insertOrdine(TortaniOrder order) async {
 
     Map<String, dynamic> payload = {
@@ -42,8 +46,7 @@ class TortaniAPIUser {
           order.num_rustici,
           order.descrizione,
           order.data_ritiro,
-          cell_num: order.cell_num,
-          ritirato: order.ritirato);
+          cell_num: order.cell_num);
 
       payload['order'] = dto.toJson();
 
@@ -58,6 +61,7 @@ class TortaniAPIUser {
     }
   }
 
+  // DOVREBBE FUNZIONARE!
   static Future<bool> updateOrdineRitirato(TortaniOrder order) async {
 
     Map<String, dynamic> payload = {
@@ -65,6 +69,9 @@ class TortaniAPIUser {
     };
 
     try {
+
+      DateTime now = DateTime.now();
+      DateTime nowRitirato = DateTime(now.year, now.month, now.day);
       TortaniOrderDTO dto = TortaniOrderDTO(
           order.idOrdine,
           order.cliente,
@@ -79,7 +86,7 @@ class TortaniAPIUser {
           order.descrizione,
           order.data_ritiro,
           cell_num: order.cell_num,
-          ritirato: order.ritirato);
+          ritirato: nowRitirato);
 
       payload['order'] = dto.toJson();
 
@@ -94,6 +101,7 @@ class TortaniAPIUser {
     }
   }
 
+  // DOVREBBE FUNZIONARE!
   static Future<bool> updateOrdine(TortaniOrder order, String oldClient) async {
 
     Map<String, dynamic> payload = {
@@ -130,10 +138,12 @@ class TortaniAPIUser {
     }
   }
 
+  // DOVREBBE FUNZIONARE!
   static Future<bool> deleteOrdine(TortaniOrder order) async {
 
     Map<String, dynamic> payload = {
       'accessToken': Constants.accessToken,
+      'id': order.idOrdine,
     };
 
     try {
@@ -146,6 +156,7 @@ class TortaniAPIUser {
     }
   }
 
+  // DOVREBBE FUNZIONARE!
   static Future<List<TortaniOrder>> getAllTortani() async {
 
     Map<String, dynamic> payload = {
@@ -184,6 +195,16 @@ class TortaniAPIUser {
         listaRes.add(elem);
       }
 
+      listaRes.sort((order1, order2){
+        if( order1.ritirato == null){
+          return -1;
+        }else if (order2.ritirato == null){
+          return 1;
+        }else{
+          return order1.ritirato!.compareTo(order2.ritirato!);
+        }
+      });
+
       return listaRes;
     } catch (e) {
       print(e);
@@ -191,10 +212,12 @@ class TortaniAPIUser {
     }
   }
 
+  // DOVREBBE FUNZIONARE!
   static Future<List<TortaniOrder>> searchOrder(String nomeCliente) async {
 
     Map<String, dynamic> payload = {
       'accessToken': Constants.accessToken,
+      'nomeCliente': nomeCliente,
     };
 
     List<TortaniOrder> listaRes = [];
@@ -229,6 +252,16 @@ class TortaniAPIUser {
         listaRes.add(elem);
       }
 
+      listaRes.sort((order1, order2){
+        if( order1.ritirato == null){
+          return -1;
+        }else if (order2.ritirato == null){
+          return 1;
+        }else{
+          return order1.ritirato!.compareTo(order2.ritirato!);
+        }
+      });
+
       return listaRes;
     } catch (e) {
       print(e);
@@ -236,10 +269,12 @@ class TortaniAPIUser {
     }
   }
 
+  // DOVREBBE FUNZIONARE!
   static Future<List<TortaniOrder>> getTortaniFromDate(DateTime date) async {
 
     Map<String, dynamic> payload = {
       'accessToken': Constants.accessToken,
+      'data': date.toString().split(" ").first,
     };
 
     List<TortaniOrder> listaRes = [];
@@ -272,6 +307,16 @@ class TortaniAPIUser {
 
         listaRes.add(elem);
       }
+
+      listaRes.sort((order1, order2){
+        if( order1.ritirato == null){
+          return -1;
+        }else if (order2.ritirato == null){
+          return 1;
+        }else{
+          return order1.ritirato!.compareTo(order2.ritirato!);
+        }
+      });
 
       return listaRes;
     } catch (e) {

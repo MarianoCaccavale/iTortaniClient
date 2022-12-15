@@ -35,7 +35,9 @@ class NetworkCallUtils {
     if (response.statusCode == 201 || response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
-    } else {
+    } else if (response.statusCode == 204){
+      return null;
+    }else {
       final data = json.decode(response.body);
       print(data);
       throw Exception(

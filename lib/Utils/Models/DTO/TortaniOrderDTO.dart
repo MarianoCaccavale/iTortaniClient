@@ -35,6 +35,7 @@ class TortaniOrderDTO{
 
   Map<String, dynamic> toJson() {
     return {
+      "Id": this.idOrdine,
       "Cliente": this.cliente,
       "NumHalfTortani": this.num_half_tortani,
       "NumTortani": this.num_tortani,
@@ -47,7 +48,7 @@ class TortaniOrderDTO{
       "Description": this.descrizione,
       "CellNum": this.cell_num,
       "DataRitiro": this.data_ritiro.toString().split(" ").first,
-      "Ritirato": this.ritirato != null ? this.ritirato.toString() : '',
+      "Ritirato": this.ritirato != null ? this.ritirato.toString().split(" ").first : null,
     };
   }
 
@@ -67,7 +68,7 @@ class TortaniOrderDTO{
       DateTime.parse(json['dataRitiro']),
       cell_num: json['cellNum'],
       ritirato:
-      json['ritirato'] == "" ? null : DateTime.parse(json['ritirato']),
+      json['ritirato'] == "" || json['ritirato'] == null ? null : DateTime.parse(json['ritirato']),
     );
   }
 }
