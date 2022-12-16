@@ -87,6 +87,7 @@ class _SpeseUpdateScreenState extends State<SpeseUpdateScreen> {
     if (_checkSpesa()) {
       try {
         var spesa = SpeseOrder.FromJson({
+          'id': widget.spesa.id,
           'cliente': cliente,
           'descrizione': descrizione,
           'cell_num': cell_num,

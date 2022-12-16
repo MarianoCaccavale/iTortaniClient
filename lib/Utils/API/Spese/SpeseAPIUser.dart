@@ -48,7 +48,8 @@ class SpeseAPIUser {
             dto.descrizione,
             dto.luogo,
             dto.check_tortani,
-            dto.data_ritiro
+            dto.data_ritiro,
+            ritirato: dto.ritirato,
         );
 
         listaRes.add(elem);
@@ -113,7 +114,9 @@ class SpeseAPIUser {
           spesa.descrizione,
           spesa.luogo,
           spesa.check_tortani,
-          spesa.data_ritiro);
+          spesa.data_ritiro,
+          ritirato: spesa.ritirato,
+      );
 
       payload['spesa'] = dto.toJson();
       
@@ -152,6 +155,9 @@ class SpeseAPIUser {
     
     try {
 
+      DateTime now = DateTime.now();
+      DateTime nowRitirato = DateTime(now.year, now.month, now.day);
+
       SpeseOrderDTO dto = SpeseOrderDTO(
           spesa.id,
           spesa.cliente,
@@ -159,7 +165,9 @@ class SpeseAPIUser {
           spesa.descrizione,
           spesa.luogo,
           spesa.check_tortani,
-          spesa.data_ritiro);
+          spesa.data_ritiro,
+          ritirato: nowRitirato,
+      );
 
       payload['spesa'] = dto.toJson();
       
@@ -180,12 +188,28 @@ class SpeseAPIUser {
 
     List<SpeseOrder> listaRes = [];
 
+    SpeseOrderDTO dto;
+    SpeseOrder elem;
+
     try {
       dynamic spese =
           await NetworkCallUtils.postCall(url: RestEndpoints.speseSearchOrder, payload: jsonEncode(payload));
 
       for (dynamic spesa in spese) {
-        listaRes.add(SpeseOrder.FromJson(spesa));
+        dto = SpeseOrderDTO.FromJson(spesa);
+
+        elem = SpeseOrder(
+          dto.id,
+          dto.cliente,
+          dto.cell_num,
+          dto.descrizione,
+          dto.luogo,
+          dto.check_tortani,
+          dto.data_ritiro,
+          ritirato: dto.ritirato,
+        );
+
+        listaRes.add(elem);
       }
 
       listaRes.sort((order1, order2){
