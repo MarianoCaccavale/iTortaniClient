@@ -40,6 +40,8 @@ class _TortaniDetailsScreenState extends State<TortaniDetailsScreen> {
           });
     }
 
+    Navigator.of(context).pop();
+
   }
 
   @override

@@ -24,6 +24,7 @@ class _SpeseUpdateScreenState extends State<SpeseUpdateScreen> {
   String luogo = '';
   bool checkTortani = false;
   DateTime? data_ritiro = null;
+  DateTime? ritirato = null;
 
   @override
   void initState() {
@@ -37,6 +38,7 @@ class _SpeseUpdateScreenState extends State<SpeseUpdateScreen> {
     descrizione = widget.spesa.descrizione;
     cell_num = widget.spesa.cell_num;
     data_ritiro = widget.spesa.data_ritiro;
+    ritirato = widget.spesa.ritirato;
     luogo = widget.spesa.luogo;
     checkTortani = widget.spesa.check_tortani;
   }
@@ -94,7 +96,7 @@ class _SpeseUpdateScreenState extends State<SpeseUpdateScreen> {
           'luogo': luogo,
           'check_tortani': checkTortani,
           'data_ritiro': data_ritiro.toString(),
-          'ritirato': '',
+          'ritirato': ritirato != null ? ritirato.toString() : '',
         });
 
         try{

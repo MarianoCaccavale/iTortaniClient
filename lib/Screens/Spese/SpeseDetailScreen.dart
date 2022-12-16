@@ -38,6 +38,8 @@ class _SpeseDetailScreen extends State<SpeseDetailScreen> {
             );
           });
     }
+
+    Navigator.of(context).pop();
   }
 
   @override

@@ -262,6 +262,7 @@ class _TortaniAddScreenState extends State<TortaniAddScreen> {
               });
         }
 
+        Navigator.of(context).pop();
 
       } catch (e) {
         print(e);

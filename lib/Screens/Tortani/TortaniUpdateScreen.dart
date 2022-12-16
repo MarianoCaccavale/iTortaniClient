@@ -31,6 +31,7 @@ class _TortaniUpdateScreenState extends State<TortaniUpdateScreen> {
   String descrizione = '';
   int cell_num = 5555555555;
   DateTime? data_ritiro = null;
+  DateTime? ritirato = null;
 
   @override
   void initState() {
@@ -52,6 +53,7 @@ class _TortaniUpdateScreenState extends State<TortaniUpdateScreen> {
     descrizione = widget.ordine.descrizione;
     cell_num = widget.ordine.cell_num;
     data_ritiro = widget.ordine.data_ritiro;
+    ritirato = widget.ordine.ritirato;
   }
 
   _addHalfTortani() {
@@ -246,7 +248,7 @@ class _TortaniUpdateScreenState extends State<TortaniUpdateScreen> {
           'descrizione': descrizione,
           'cell_num': cell_num,
           'data_ritiro': data_ritiro.toString(),
-          'ritirato': '',
+          'ritirato': ritirato != null ? ritirato.toString() : '',
         });
 
         try{
@@ -268,7 +270,6 @@ class _TortaniUpdateScreenState extends State<TortaniUpdateScreen> {
                 );
               });
         }
-
 
         Navigator.of(context).pop();
       } catch (e) {

@@ -1,6 +1,6 @@
 class RestEndpoints {
   // static final _root = 'https://localhost:7023/api/';
-  static final _root = 'https://10.0.2.2:7023/api/';
+  static final _root = 'https://192.168.1.7:7023/api/';
 
   static final _tortaniController = "Order/";
   static final tortaniDeleteAll = _root + _tortaniController + "delete_all";
